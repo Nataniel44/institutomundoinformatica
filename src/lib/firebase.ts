@@ -1,3 +1,4 @@
+
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 
@@ -11,13 +12,45 @@ import { getAuth, Auth } from 'firebase/auth';
 // NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
 // NEXT_PUBLIC_FIREBASE_APP_ID=1:your-app-id:web:your-app-id-web
 
+const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+const authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN;
+const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET;
+const messagingSenderId = process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
+const appId = process.env.NEXT_PUBLIC_FIREBASE_APP_ID;
+
+if (!apiKey) {
+  throw new Error(
+    'Firebase API Key (NEXT_PUBLIC_FIREBASE_API_KEY) is missing. ' +
+    'Please ensure you have a .env.local file in the project root ' +
+    'with NEXT_PUBLIC_FIREBASE_API_KEY defined. ' +
+    'You can find these values in your Firebase project settings. ' +
+    'After adding/updating the .env.local file, you MUST restart your development server.'
+  );
+}
+if (!authDomain) {
+  // While the primary error is invalid-api-key, authDomain is also critical for initialization.
+  console.warn(
+    'Firebase Auth Domain (NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN) might be missing or incorrect. ' +
+    'Please verify it in your .env.local file and Firebase project settings.'
+  );
+}
+if (!projectId) {
+  // ProjectId is also critical.
+  console.warn(
+    'Firebase Project ID (NEXT_PUBLIC_FIREBASE_PROJECT_ID) might be missing or incorrect. ' +
+    'Please verify it in your .env.local file and Firebase project settings.'
+  );
+}
+
+
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: apiKey,
+  authDomain: authDomain,
+  projectId: projectId,
+  storageBucket: storageBucket,
+  messagingSenderId: messagingSenderId,
+  appId: appId,
 };
 
 let app: FirebaseApp;
