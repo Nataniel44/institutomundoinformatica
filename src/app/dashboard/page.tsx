@@ -103,7 +103,7 @@ export default function DashboardPage() {
     <p>Explorá los cursos disponibles y comenzá a aprender hoy mismo 🚀</p>
     <Link href="/" passHref>
       <Button className="bg-primary text-white hover:bg-primary/90">
-        Ir al Inicio
+        Ir al Inicio →
       </Button>
     </Link>
   </div>
