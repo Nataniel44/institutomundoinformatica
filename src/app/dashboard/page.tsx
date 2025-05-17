@@ -16,7 +16,15 @@ import { useState } from 'react'; // Import useState
 export default function DashboardPage() {
   const { user, loading, signOutUser } = useAuth();
   const router = useRouter();
-
+  function handleNavigateWithTransition(href: string) {
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        router.push(href);
+      });
+    } else {
+      router.push(href);
+    }
+  }
   useEffect(() => {
     if (!loading && !user) {
       router.replace('/login');
@@ -127,9 +135,9 @@ export default function DashboardPage() {
                     <span className="text-sm text-muted-foreground">
                       Nivel: <strong>{course.level || 'General'}</strong>
                     </span>
-                    <Link href={`/courses/${course.id}`}>
-                      <Button size="sm" variant="outline">Ver Curso →</Button>
-                    </Link>
+                  
+                      <Button onClick={() => handleNavigateWithTransition(`/courses/${course.id}`)} size="sm" variant="outline">Ver Curso →</Button>
+                   
                   </CardContent>
                 </Card>
               ))}
