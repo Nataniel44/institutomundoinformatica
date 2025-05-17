@@ -98,9 +98,11 @@ export default function HomePage() {
           <p className="text-xl md:text-2xl mb-8 animate-fade-in-up">
             Descubre una nueva forma de aprender y alcanza tus metas profesionales.
           </p>
-          <div className="flex justify-center gap-4 animate-fade-in-up">
+          <div className="flex justify-center gap-4 md:flex-row flex-col animate-fade-in-up">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">Explorar Cursos</Button>
-            <Button size="lg" variant="link" className="text-white border-white hover:bg-white hover:text-blue-600">Regístrate Ahora</Button>
+            <Button size="lg" variant="link" className="text-white border-white hover:bg-white hover:text-blue-600" asChild>
+              <a href="/register">Regístrate Ahora</a>
+            </Button>
             
           </div>
 
