@@ -111,7 +111,7 @@ export default function DashboardPage() {
 
       {/* Tiene cursos */}
       {!coursesLoading && enrolledCourses.length > 0 && (
-        <div className="shadow-lg border-primary/20 mt-6">
+        <div className="  mt-6">
           <CardTitle className="text-2xl font-bold text-primary">Tus Cursos Inscritos</CardTitle>
           <CardDescription className="text-muted-foreground">
             Ingresá al curso para ver las clases, materiales y avanzar.
