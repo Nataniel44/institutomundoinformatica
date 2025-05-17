@@ -11,8 +11,8 @@ import Header from '@/components/layout/Header';
 // Their .variable properties (e.g., GeistSans.variable) are automatically available.
 
 export const metadata: Metadata = {
-  title: 'Mundo Informática Educativa',
-  description: 'Plataforma de aprendizaje interactivo.',
+  title: 'INSTITUTO MUNDO INFORMÁTICA',
+  description: 'Plataforma de aprendizaje educativa para la enseñanza de informática.',
 };
 
 export default function RootLayout({

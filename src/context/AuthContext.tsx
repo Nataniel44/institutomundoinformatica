@@ -1,7 +1,7 @@
 "use client";
 
 import type { User as FirebaseUser, AuthError } from 'firebase/auth';
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode, useMemo } from 'react';
 import { onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useToast } from '@/hooks/use-toast';
@@ -13,6 +13,7 @@ interface AuthContextType {
   loading: boolean;
   signUp: (data: RegisterFormData) => Promise<FirebaseUser | null>;
   signIn: (data: LoginFormData) => Promise<FirebaseUser | null>;
+  auth: typeof auth; // Expose the auth object
   signOutUser: () => Promise<void>;
 }
 
@@ -102,10 +103,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const value = useMemo(
+    () => ({
+      user,
+      loading,
+      signUp,
+      signIn,
+      auth, // Provide the auth object
+      signOutUser,
+    }),
+    [user, loading, signUp, signIn, signOutUser, auth]
+  );
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOutUser }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
   );
 };
 
